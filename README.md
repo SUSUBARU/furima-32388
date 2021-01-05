@@ -2,16 +2,16 @@
 
 ## users テーブル
 
-| Column               | Type    | Options     |
-| -------------------- | ------  | ----------- |
-| nickname             | string  | null: false |ニックネーム
-| email                | string  | null: false |メールアドレス
-| encrypted_password   | string  | null: false |パスワード
-| last_name            | string  | null: false |お名前姓(全角)
-| first_name           | string  | null: false |お名前名(全角)
-| last_name_reading    | string  | null: false |お名前姓カナ(全角)
-| first_name_reading   | string  | null: false |お名前名カナ(全角)
-| birthday             | date    | null: false |生年月日
+| Column               | Type    | Options                   |
+| -------------------- | ------  | ------------------------- |
+| nickname             | string  | null: false               |ニックネーム
+| email                | string  | null: false, unique: true |メールアドレス
+| encrypted_password   | string  | null: false               |パスワード
+| last_name            | string  | null: false               |お名前姓(全角)
+| first_name           | string  | null: false               |お名前名(全角)
+| last_name_reading    | string  | null: false               |お名前姓カナ(全角)
+| first_name_reading   | string  | null: false               |お名前名カナ(全角)
+| birthday             | date    | null: false               |生年月日
 
 ### Association
 
