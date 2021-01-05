@@ -36,7 +36,7 @@
 ### Association
 
 - belongs_to :user
-- has_one    :user_items
+- has_one    :user_item
 
 # buys テーブル
 
@@ -46,14 +46,14 @@
 | prefecture_id             | integer     | null: false                    |都道府県
 | city                      | string      | null: false                    |市町村
 | house_number              | string      | null: false                    |番地
-| building_name             | string      | null: false                    |建物名
+| building_name             | string      |                                |建物名
 | phone_number              | string      | null: false                    |電話番号
-| user_items                | references  | null: false, foreign_key: true |
+| user_item                 | references  | null: false, foreign_key: true |
 
 
 ### Association
 
-- belongs_to :user_items
+- belongs_to :user_item
 
 
 ## user_items テーブル
