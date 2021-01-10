@@ -80,7 +80,31 @@ describe User do
         @user.valid?
         expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
       end
-      
+      it "last_nameが存在しなければ登録できない" do
+        @user.last_name = ""
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Last name can't be blank")
+      end
+      it "first_nameが存在しなければ登録できない" do
+        @user.first_name = ""
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First name can't be blank")
+      end
+      it "last_name_readingが存在しなければ登録できない" do
+        @user.last_name_reading = ""
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Last name reading can't be blank")
+      end
+      it "first_name_readingが存在しなければ登録できない" do
+        @user.first_name_reading = ""
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First name reading can't be blank")
+      end
+      it "birthdayが存在しなければ登録できない" do
+        @user.birthday = ""
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Birthday can't be blank")
+      end
     end
   end
 end
