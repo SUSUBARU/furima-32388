@@ -10,7 +10,7 @@ describe User do
       it "nickname、email、password、password_confirmation、last_name、first_name、last_name_reading、first_name_reading、birthdayが存在すれば登録できる" do
         expect(@user).to be_valid
       end
-      it "nicknameが6文字以下で登録できる" do
+      it "nicknameが存在すれば登録できる" do
         @user.nickname = "test"
         expect(@user).to be_valid
       end
@@ -47,15 +47,15 @@ describe User do
         @user.valid?
         expect(@user.errors.full_messages).to include("Nickname can't be blank")
       end
-      it "nicknameが7文字以上であれば登録できない" do
-        @user.nickname = "aaaaaaa"
-        @user.valid?
-        expect(@user.errors.full_messages).to include("Nickname is too long (maximum is 6 characters)")
-      end
       it "emailが空では登録できない" do
         @user.email = ""
         @user.valid?
         expect(@user.errors.full_messages).to include("Email can't be blank")
+      end
+      it "emailが空では登録できない" do
+        @user.email = "www.com"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Email is invalid")
       end
       it "重複したemailが存在する場合登録できない" do
         @user.save
@@ -69,8 +69,18 @@ describe User do
         @user.valid?
         expect(@user.errors.full_messages).to include("Password can't be blank")
       end
-      it "passwordが半角英数混合でないと登録できない" do
+      it "passwordが数字のみだと登録できない" do
         @user.password = "111111"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password には英字と数字の両方を含めて設定してください")
+      end
+      it "passwordが英字のみだと登録できない" do
+        @user.password = "aaaaaa"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password には英字と数字の両方を含めて設定してください")
+      end
+      it "passwordが全角文字だと登録できない" do
+        @user.password = "ああああああ"
         @user.valid?
         expect(@user.errors.full_messages).to include("Password には英字と数字の両方を含めて設定してください")
       end
