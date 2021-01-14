@@ -11,7 +11,7 @@ class Item < ApplicationRecord
   validates :prefecture_id, presence: true
   validates :delivery_date_id, presence: true
   with_options presence: true, format: { with: /\A[\d]+\z/, message: 'には半角数字を使用してください'  } do
-    validates :price, presence: true, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to:9,999,999, message: "is out of setting range"}
+    validates :price, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "is out of setting range" }
   end
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to_active_hash :category
@@ -25,5 +25,9 @@ class Item < ApplicationRecord
   validates :burden_id, numericality: { other_than: 1 }
   validates :prefecture_id, numericality: { other_than: 1 }
   validates :delivery_date_id, numericality: { other_than: 1 }
+
+  def was_attached?
+    self.image.attached?
+  end
 
 end
