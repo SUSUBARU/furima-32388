@@ -128,7 +128,7 @@
 
       <% @items.each do |item| %>
       <li class='list'>
-        <%= link_to '#', item_path(item.id) %>
+        <%= link_to item_path(item.id) do %>
         <div class='item-img-content'>
           <%= image_tag item.image, class: "item-img" if item.image.attached? %>
 
@@ -151,6 +151,7 @@
             </div>
           </div>
         </div>
+        <% end %>
       </li>
       <% end %>
 
