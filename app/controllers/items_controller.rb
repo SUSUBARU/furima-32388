@@ -27,6 +27,10 @@ class ItemsController < ApplicationController
   def edit
   end
 
+  def update
+    item = Item.find(params[:id])
+    item.uodate(item_params)
+
   private
 
   def item_params
