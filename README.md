@@ -16,7 +16,7 @@
 ### Association
 
 - has_many :items
-- has_many :user_items
+- has_many :orders
 
 ## items テーブル
 
@@ -36,7 +36,7 @@
 ### Association
 
 - belongs_to :user
-- has_one    :user_item
+- has_one    :order
 
 # buys テーブル
 
@@ -45,23 +45,23 @@
 | postal_code               | string      | null: false                    |郵便番号
 | prefecture_id             | integer     | null: false                    |都道府県
 | city                      | string      | null: false                    |市町村
-| house_number              | string      | null: false                    |番地
+| addresses                 | string      | null: false                    |番地
 | building_name             | string      |                                |建物名
 | phone_number              | string      | null: false                    |電話番号
-| user_item                 | references  | null: false, foreign_key: true |
+| order                     | references  | null: false, foreign_key: true |
 
 
 ### Association
 
-- belongs_to :user_item
+- belongs_to :order
 
 
-## user_items テーブル
+## orders テーブル
 
 | Column | Type       | Options                         |
 | ------ | ---------- | ------------------------------- |
 | user   | references | null: false, foreign_key: true  |
-| item   | references | null: false, foreign_key: true |
+| item   | references | null: false, foreign_key: true  |
 
 
 ### Association
