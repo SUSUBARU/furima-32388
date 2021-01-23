@@ -18,10 +18,6 @@ class OrdersController < ApplicationController
     end
   end
 
-  def show
-    @user_item = UserItem.find(params[:id])
-  end
-
   private
 
   def user_item_params
