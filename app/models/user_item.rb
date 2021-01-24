@@ -5,11 +5,11 @@ class UserItem
   # ここにバリデーションの処理を書く
 
   with_options presence: true do
-    validates :postal_code, format: { with: /\A\d{3}[-]\d{4}\z/, message: 'を入力してください' }
+    validates :postal_code, format: { with: /\A\d{3}[-]\d{4}\z/, message: '半角数字3文字ハイフン半角数字4文字を入力してください' }
     validates :prefecture_id
     validates :city
     validates :addresses
-    validates :phone_number, format: { with: /\A\d{11}\z/, message: 'を入力してください' }
+    validates :phone_number, format: { with: /\A\d{11}\z/, message: '半角数字11文字を入力してください' }
   end
   
   with_options numericality: { other_than: 1 } do
