@@ -1,27 +1,23 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, except: [:index]
   def index
-    @user_items = UserItem.includes(:user)
+    @order = UserItem.new
   end
 
   def create
-    #binding.pry(ターミナルにはparams入力すること)
-    @user_item = UserItem.new(user_item_params)
-    if @user_item.user_id == current_user.id
-      redirect_to action: :index
-    end
-    if @user_item.valid?
-      @user_item.save
-      redirect_to action: :index
+    @order = UserItem.new(order_params)
+    if @order.valid?
+      @order.save
+      return redirect_to root_path
     else
-      render action: :new
+      render :index
     end
   end
 
   private
 
-  def user_item_params
-    params.require(:user_item).permit(:user_id, :item_id, :postal_code, :prefecture_id, :city, :addresses, :building_name, :phone_number).merge(token: params[:token])
+  def order_params
+    params.permit(:user_item, :postal_code, :prefecture_id, :city, :addresses, :building_name, :phone_number, :user_id, :item_id).merge(user_id: current_user.id)
   end
 
 end
