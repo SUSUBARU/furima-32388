@@ -40,38 +40,42 @@ RSpec.describe UserItem, type: :model do
       it "郵便番号が空であれば、登録ができない" do
         @user_item.postal_code = nil
         @user_item.valid?
-        binding.pry
         expect(@user_item.errors.full_messages).to include("Postal code can't be blank")
       end
-      it "都道府県の情報が1であれば、登録ができない" do
-        @user_item.prefecture_id = nil
+      it "郵便番号にハイフンがなければ、登録ができない" do
+        @user_item.postal_code = "1111111"
         @user_item.valid?
-        binding.pry
+        expect(@user_item.errors.full_messages).to include("Postal code 半角数字3文字ハイフン半角数字4文字を入力してください")
+      end
+      it "都道府県の情報が空であれば、登録ができない" do
+        @user_item.prefecture_id = ""
+        @user_item.valid?
         expect(@user_item.errors.full_messages).to include("Prefecture can't be blank")
+      end
+      it "都道府県の情報が1であれば、登録ができない" do
+        @user_item.prefecture_id = "1"
+        @user_item.valid?
+        expect(@user_item.errors.full_messages).to include("Prefecture must be other than 1")
       end
       it "市町村についての情報が空であれば、登録ができない" do
         @user_item.city = nil
         @user_item.valid?
-        binding.pry
         expect(@user_item.errors.full_messages).to include("City can't be blank")
       end
       it "番地についての情報が空であれば、登録ができない" do
         @user_item.addresses = nil
         @user_item.valid?
-        binding.pry
         expect(@user_item.errors.full_messages).to include("Addresses can't be blank")
       end
       it "電話番号についての情報が空であれば、登録ができない" do
         @user_item.phone_number = nil
         @user_item.valid?
-        binding.pry
         expect(@user_item.errors.full_messages).to include("Phone number can't be blank")
       end
       it "電話番号についての情報が全角数字であれば、登録ができない" do
         @user_item.phone_number = "１１１１１１１１１１１"
         @user_item.valid?
-        binding.pry
-        expect(@user_item.errors.full_messages).to include("Phone number を入力してください")
+        expect(@user_item.errors.full_messages).to include("Phone number 半角数字11文字を入力してください")
       end
     end
   end
