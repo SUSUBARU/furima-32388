@@ -34,6 +34,10 @@ RSpec.describe UserItem, type: :model do
         @user_item.phone_number = "11111111111"
         expect(@user_item).to be_valid
       end
+      it "トークンが送信されれば、登録ができる" do
+        @user_item.token = "tok_abcdefghijk00000000000000000"
+        expect(@user_item).to be_valid
+      end
     end
 
     context '購入情報登録がうまくいかないとき' do
@@ -76,6 +80,11 @@ RSpec.describe UserItem, type: :model do
         @user_item.phone_number = "１１１１１１１１１１１"
         @user_item.valid?
         expect(@user_item.errors.full_messages).to include("Phone number 半角数字11文字を入力してください")
+      end
+      it "tokenが空では登録できないこと" do
+        @user_item.token = ""
+        @user_item.valid?
+        expect(@user_item.errors.full_messages).to include("Token can't be blank")
       end
     end
   end
