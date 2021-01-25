@@ -1,6 +1,6 @@
 class UserItem
   include ActiveModel::Model
-  attr_accessor :postal_code, :prefecture_id, :city, :addresses, :building_name, :phone_number, :user_id, :item_id, :order_id
+  attr_accessor :postal_code, :prefecture_id, :city, :addresses, :building_name, :phone_number, :user_id, :item_id, :order_id, :token
 
   # ここにバリデーションの処理を書く
 
@@ -10,6 +10,7 @@ class UserItem
     validates :city
     validates :addresses
     validates :phone_number, format: { with: /\A\d{11}\z/, message: '半角数字11文字を入力してください' }
+    validates :token
   end
   
   with_options numericality: { other_than: 1 } do
