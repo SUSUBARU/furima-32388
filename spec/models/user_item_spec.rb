@@ -53,7 +53,7 @@ RSpec.describe UserItem, type: :model do
         expect(@user_item.errors.full_messages).to include("Prefecture can't be blank")
       end
       it "都道府県の情報が1であれば、登録ができない" do
-        @user_item.prefecture_id = "1"
+        @user_item.prefecture_id = 1
         @user_item.valid?
         expect(@user_item.errors.full_messages).to include("Prefecture must be other than 1")
       end
