@@ -26,10 +26,6 @@ RSpec.describe UserItem, type: :model do
         @user_item.addresses = "1-1-1"
         expect(@user_item).to be_valid
       end
-      it "建物名についての情報を入力しなくても、登録ができる" do
-        @user_item.building_name = ""
-        expect(@user_item).to be_valid
-      end
       it "電話番号についての情報を入力すれば、登録ができる" do
         @user_item.phone_number = "11111111111"
         expect(@user_item).to be_valid
