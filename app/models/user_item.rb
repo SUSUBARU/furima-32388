@@ -11,6 +11,8 @@ class UserItem
     validates :addresses
     validates :phone_number, format: { with: /\A\d{11}\z/, message: '半角数字11文字を入力してください' }
     validates :token
+    validates :user_id
+    validates :item_id
   end
   
   with_options numericality: { other_than: 1 } do
