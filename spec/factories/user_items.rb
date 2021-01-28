@@ -6,8 +6,6 @@ FactoryBot.define do
     building_name     {Faker::Address.building_number}
     phone_number      {"11111111111"}
     prefecture_id     {Faker::Number.between(from: 2, to: 48)}
-    user_id           {1}
-    item_id           {2}
     token             {"tok_abcdefghijk00000000000000000"}
   end
 end

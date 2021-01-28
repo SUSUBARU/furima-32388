@@ -3,6 +3,8 @@ require 'rails_helper'
 RSpec.describe UserItem, type: :model do
   before do
     @user_item = FactoryBot.build(:user_item)
+    @user_item.user_id = FactoryBot.build(:user)
+    @user_item.item_id = FactoryBot.build(:item)
   end
 
   describe '購入情報登録' do
@@ -10,28 +12,8 @@ RSpec.describe UserItem, type: :model do
       it "必要な情報が存在すれば、登録できる" do
         expect(@user_item).to be_valid
       end
-      it "郵便番号を入力すれば、登録ができる" do
-        @user_item.postal_code = "111-1111"
-        expect(@user_item).to be_valid
-      end
-      it "都道府県についての情報を入力すれば、登録ができる" do
-        @user_item.prefecture_id = "2"
-        expect(@user_item).to be_valid
-      end
-      it "市町村についての情報を入力すれば、登録ができる" do
-        @user_item.city = "渋谷区"
-        expect(@user_item).to be_valid
-      end
-      it "番地についての情報を入力すれば、登録ができる" do
-        @user_item.addresses = "1-1-1"
-        expect(@user_item).to be_valid
-      end
-      it "電話番号についての情報を入力すれば、登録ができる" do
-        @user_item.phone_number = "11111111111"
-        expect(@user_item).to be_valid
-      end
-      it "トークンが送信されれば、登録ができる" do
-        @user_item.token = "tok_abcdefghijk00000000000000000"
+      it "建物名についての情報を入力しなくても、登録ができる" do
+        @user_item.building_name = ""
         expect(@user_item).to be_valid
       end
     end
@@ -91,6 +73,16 @@ RSpec.describe UserItem, type: :model do
         @user_item.token = ""
         @user_item.valid?
         expect(@user_item.errors.full_messages).to include("Token can't be blank")
+      end
+      it "user_idが存在しないと登録できないこと" do
+        @user_item.user_id = ""
+        @user_item.valid?
+        expect(@user_item.errors.full_messages).to include("User can't be blank")
+      end
+      it "item_idが存在しないと登録できないこと" do
+        @user_item.item_id = ""
+        @user_item.valid?
+        expect(@user_item.errors.full_messages).to include("Item can't be blank")
       end
     end
   end
